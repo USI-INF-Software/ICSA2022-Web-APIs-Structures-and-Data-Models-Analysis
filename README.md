@@ -33,8 +33,8 @@ The data schema of the entries representing each API is:
         "usage_amount": { "type" : "integer", "required" : true , "description" : "the rate of schemas used in the API"},
         "embeddedSchemas": { "type" : "integer", "required" : true , "description" : "the number of embedded schemas in the API"},
         "referencedSchemas": { "type" : "integer", "required" : true , "description" : "the number of referenced schemas in the API"},
-        "breath": { "type" : "integer", "required" : true , "description" : ""},
-        "depth": { "type" : "integer", "required" : true , "description" : ""},
+        "breadth": { "type" : "integer", "required" : true , "description" : "Number of top-level distinct path segments"},
+        "depth": { "type" : "integer", "required" : true , "description" : "Maximum path length (in terms of path segments)"},
         "age":  { "type" : "integer", "required" : true , "description" : "age of the API by days"},
         "popularity": { "type" : "integer", "required" : true , "description" : "popularity of the API by number of forks"},
         "methodsperPath": { "type" : "integer", "required" : true , "description" : "the  average number of methods per path in the API"},
@@ -42,5 +42,7 @@ The data schema of the entries representing each API is:
     }
 }
 ```
+
+The paper provides more details on the API Structure and Data Model Size metrics definition.
 
 Please contact Souhaila Serbout for any questions.
