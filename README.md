@@ -49,12 +49,12 @@ The paper provides more details on the API Structure and Data Model Size metrics
 
 In the paper we describe inSection: II. DATASET, the workflow followed to prepared the final dataset use in the empirical study. This final dataset is the one we share in this repo. (https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis/blob/main/OASCollection_and_metrics.json.zip?raw=true ).
 
-1. OpenAPI Specification Bundling
+1. OpenAPI Specifications Bundling
 
 APIs descriptions written in OpenAPI can be spread over multiple files. To ease the father analysis, we bundle all the external referenced file into one file.
 Note that all the OpenAPI specification in the final dataset are valid. 
 
-2. OpenAPI Specification parsing and datamodel extraction. 
+2. OpenAPI Specifications parsing and datamodel extraction. 
 
 To parse the specififcations we used the Node.js parser https://github.com/APIDevTools/swagger-parser that supports both OAS 2 and OAS 3.
 By going over all the APIs endpoints, we extracted all the dataschemas by keeping track of the realationships between them and the location when they were defined. If a schemas definition is embedded in the response object of an endpoint, then it is automatically considered as a used schema. While, in the case of the schemas defined in the `components` or `definitions` section, we look for ($ref) references to these schemas to track their usage.
