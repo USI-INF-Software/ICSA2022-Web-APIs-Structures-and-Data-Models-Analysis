@@ -1,8 +1,7 @@
 # Replication Package for the ICSA 2022 Artifact Evaluation Track
-This is the replication package of the paper entitled _"Web APIs Structures and Data Models Analysis"_ by Souhaila Serbout, Fabio Di Lauro, and Cesare Pautassoo, accepted to the Technical Track of the 19th IEEE International Conference on Software Architecture (ICSA 2022). 
+This is the replication package of the paper entitled "Web APIs Structures and Data Models Analysis" by Souhaila Serbout, Fabio Di Lauro, and Cesare Pautasso accepted to the Technical Track of the 19th IEEE International Conference on Software Architecture (ICSA 2022).
 
-The work consists on an empirical study performed on an set of 40,042 OpenAPI Specifications collected from Open Source repositories on Github. 
-In this repository we publish the metadata of the studied APIs beside the computed metrics discussed in the paper in: https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis/blob/main/OASCollection_and_metrics.json.zip?raw=true (JSON format).
+The work consists of an empirical study performed on a set of 40,042 OpenAPI Specifications collected from Open Source repositories on Github. In this repository, we publish the metadata of the studied APIs besides the computed metrics discussed in the paper in: https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis/blob/main/OASCollection_and_metrics.json.zip?raw=true (JSON format).
 
 The data schema of the entries representing each API is:
 
