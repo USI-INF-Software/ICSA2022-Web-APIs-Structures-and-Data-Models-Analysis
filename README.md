@@ -56,7 +56,7 @@ Note that all the OpenAPI specification in the final dataset are valid.
 
 2. OpenAPI Specifications parsing and datamodel extraction. 
 
-To parse the specififcations we used the Node.js parser https://github.com/APIDevTools/swagger-parser that supports both OAS 2 and OAS 3.
+To parse the specififcations we used the  parser https://github.com/APIDevTools/swagger-parser for Node.js, that supports both OAS 2 and OAS 3.
 By going over all the APIs endpoints, we extracted all the dataschemas by keeping track of the realationships between them and the location when they were defined. If a schemas definition is embedded in the response object of an endpoint, then it is automatically considered as a used schema. While, in the case of the schemas defined in the `components` or `definitions` section, we look for ($ref) references to these schemas to track their usage.
  
 In the paper we provide more details about the data model related metrics, and the relatioships we defined between the schemas.  
