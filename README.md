@@ -45,4 +45,4 @@ The data schema of the entries representing each API is:
 
 The paper provides more details on the API Structure and Data Model Size metrics definition.
 
-Please contact Souhaila Serbout for any questions.
+Please contact Souhaila Serbout (souhaila.serbout@usi.ch) for any questions.
