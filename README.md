@@ -63,6 +63,7 @@ git clone https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-D
 To install the required modules, run:
 
 ```
+cd ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis
 npm install 
 ```
 
