@@ -7,6 +7,18 @@ let ejs = require('ejs');
 let views = fs.readdirSync("latex-views")
     .filter(f => f.endsWith(".ejs"))
     .reduce((a, c) => { a[c.replace(".ejs", "")] = new String(fs.readFileSync("latex-views/" + c)); return a }, {});
+/**if results-tex doesn't exit create it */
+if (!fs.existsSync('results-tex')) {
+    fs.mkdirSync('results-tex');
+}
+/**if results-pdf does't exist create it */
+if (!fs.existsSync('results-pdf')) {
+    fs.mkdirSync('results-pdf');
+}
+/**if build does't exist create it */
+if (!fs.existsSync('build')) {
+    fs.mkdirSync('build');
+}
 /** check if the file OASCollection_and_metrics.json exists*/
 if (!fs.existsSync('OASCollection_and_metrics.json')) {
     /*unzip the OASCollection_and_metrics.json.zip file*/
@@ -28,8 +40,10 @@ if (!fs.existsSync('OASCollection_and_metrics.json')) {
     })
 }
 else {
+
     fs.readFile('OASCollection_and_metrics.json', 'utf8', function (err, contents) {
         var data = JSON.parse(contents);
+
         generateMonthlyDistributionResults(data);
         // generateClassesPlot(data)
         generateScatterPlots(data, "paths", "unique_defined_schemas")
@@ -67,6 +81,7 @@ function generateMonthlyDistributionResults(data) {
     });
     var data = { data: { total, invalid, valid } };;
     /*generate the monthly distribution plot results*/
+
     fs.writeFileSync('results-tex/monthly-distribution-results.tex', ejs.render(views["monthly-cumulative-distribution"], data));
 
 
