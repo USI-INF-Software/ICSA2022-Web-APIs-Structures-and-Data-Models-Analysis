@@ -48,18 +48,14 @@ The paper provides more details on the API Structure and Data Model Size metrics
 
 In the paper we describe inSection: II. DATASET, the workflow followed to prepared the final dataset use in the empirical study. This final dataset is the one we share in this repo. (https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis/blob/main/OASCollection_and_metrics.json.zip?raw=true ).
 
-1. OpenAPI Specifications Bundling
+For obtaining the results presented in the paper, we prepared scripts that can be run to obtain the plotted results.
 
-APIs descriptions written in OpenAPI can be spread over multiple files. To ease the father analysis, we bundle all the external referenced file into one file.
-Note that all the OpenAPI specification in the final dataset are valid. 
+# requirements
+To run the scripts you are required to have Node.js installed in your machine ( https://nodejs.org/en/download/ )
 
-2. OpenAPI Specifications parsing and datamodel extraction. 
+# steps
+First clone this repository on your machine 
 
-To parse the specififcations we used the  parser https://github.com/APIDevTools/swagger-parser for Node.js, that supports both OAS 2 and OAS 3.
-By going over all the APIs endpoints, we extracted all the dataschemas by keeping track of the relationships between them and the location where they were defined to calculate the defined metrics related to the data schemas definition and usage. For instance, if a schemas definition is embedded in the response object of an endpoint, then it is automatically considered as a used schema. While, in the case of the schemas defined in the `components` or `definitions` section, we look for ($ref) references to these schemas to track their usage.
- 
-In the paper we provide more details about the data model related metrics, and the relatioships we defined between the schemas.  
-
-
-
-Please contact Souhaila Serbout (souhaila.serbout@usi.ch) for any questions.
+```
+git clone 
+```

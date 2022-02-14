@@ -24,8 +24,10 @@
   },
   "homepage": "https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis#readme",
   "dependencies": {
+    "child_process": "^1.0.2",
     "ejs": "^3.1.6",
     "fs": "^0.0.1-security",
+    "sys": "^0.0.1",
     "unzip": "^0.1.11",
     "unzipper": "^0.10.11",
     "zlib": "^1.0.5"

@@ -16,7 +16,14 @@ if (!fs.existsSync('OASCollection_and_metrics.json')) {
             var data = JSON.parse(contents);
             generateMonthlyDistributionResults(data);
             generateScatterPlots(data, "paths", "unique_defined_schemas")
-            generateScatterPlots(data, "breadth", "unique_defined_schemas")
+            generateScatterPlots(data, "breath", "unique_defined_schemas")
+            generateScatterPlots(data, "paths", "unique_used_schemas")
+            generateScatterPlots(data, "breath", "unique_used_schemas")
+            generateScatterPlots(data, "popularity", "paths")
+            generateScatterPlots(data, "reused_schemas", "paths")
+            generateScatterPlots(data, "paths", "breath")
+            generateScatterPlots(data, "httpmethods", "breath")
+            generateScatterPlots(data, "httpmethods", "paths")
         });
     })
 }
@@ -26,7 +33,14 @@ else {
         generateMonthlyDistributionResults(data);
         // generateClassesPlot(data)
         generateScatterPlots(data, "paths", "unique_defined_schemas")
-        generateScatterPlots(data, "paths", "unique_defined_schemas")
+        generateScatterPlots(data, "breath", "unique_defined_schemas")
+        generateScatterPlots(data, "paths", "unique_used_schemas")
+        generateScatterPlots(data, "breath", "unique_used_schemas")
+        generateScatterPlots(data, "popularity", "paths")
+        generateScatterPlots(data, "reused_schemas", "paths")
+        generateScatterPlots(data, "paths", "breath")
+        generateScatterPlots(data, "httpmethods", "breath")
+        generateScatterPlots(data, "httpmethods", "paths")
     });
 }
 
@@ -52,7 +66,6 @@ function generateMonthlyDistributionResults(data) {
         }
     });
     var data = { data: { total, invalid, valid } };;
-    console.log(data);
     /*generate the monthly distribution plot results*/
     fs.writeFileSync('results-tex/monthly-distribution-results.tex', ejs.render(views["monthly-cumulative-distribution"], data));
 
@@ -73,7 +86,6 @@ function generateScatterPlots(data, x, y) {
     var xs = [];
     var ys = [];
     data.forEach(function (item) {
-       
         if (item.metrics[x] != 0 && item.metrics[y] != 0) {
             xs.push(item.metrics[x]);
             ys.push(item.metrics[y]);
@@ -115,7 +127,8 @@ function generateScatterPlots(data, x, y) {
     y_std = Math.sqrt(y_var);
     correlation = covar / (x_std * y_std);
 
-    console.log(correlation);
+   if(x == 'breath') x = "Breadth"
+   if(y== ' breath') y='Breadth'
     var toPrint = {data:{ d:d, x: x, y: y, count: counter,corr:correlation.toFixed(2) }}
     fs.writeFileSync(`results-tex/scatter-plot-${x}-vs-${y}.tex`, ejs.render(views["scatter-plot"], toPrint));
 }

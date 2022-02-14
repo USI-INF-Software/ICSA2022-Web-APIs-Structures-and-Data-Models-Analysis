@@ -3,3 +3,5 @@ node_modules/
 OASCollection_and_metrics.json
 results-pdf/
 results-tex/
+build/
+__MACOSX
