@@ -60,19 +60,19 @@ First clone this repository on your machine
 git clone https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis.git
 ```
 
-Then run:
+To install the required modules, run:
 
 ```
 npm install 
 ```
 
-to install the required modules. 
+ 
 
-To produce the results run: 
+To produce the results, run: 
 ```
 node generate-results.js 
 ```
-And, finally, the following command which generates the results visualizations used in the paper and additional ones in the `results-pdf` folder.
+Finally, the following command which generates the results visualizations used in the paper and additional ones in the `results-pdf` folder.
 
 ```
 node compile-results.js 
