@@ -50,10 +50,10 @@ In the paper we describe inSection: II. DATASET, the workflow followed to prepar
 
 For obtaining the results presented in the paper, we prepared scripts that can be run to obtain the plotted results.
 
-# requirements
+### requirements
 To run the scripts you are required to have Node.js installed in your machine ( https://nodejs.org/en/download/ )
 
-# steps
+### steps
 First clone this repository on your machine 
 
 ```
