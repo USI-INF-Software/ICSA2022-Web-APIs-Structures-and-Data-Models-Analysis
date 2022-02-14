@@ -1,0 +1,64 @@
+\documentclass[tikz, border=1mm]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+%\usepackage{pgfplotstable}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[xbar stacked,
+  y=-0.5cm,
+  bar width=4pt,
+  xmin=0,
+enlarge y limits={abs=0.3cm}, y dir=reverse,
+ylabel = {\#Paths},
+xlabel={\#APIs},
+
+ytick={1.5,3.5,5.5},
+yticklabels={{None},{One},{Many}},
+width=10cm,
+height=5cm,
+ytick distance=1,	
+y tick label style={font=\footnotesize,text width=0.75cm, label style={font=\footnotesize},
+tick label style={font=\footnotesize,align=right}},
+legend cell align=left,
+legend style={at={(0,1.18)},anchor=west,font=\footnotesize}, legend columns=4
+	]
+
+
+\addlegendimage{empty legend}
+\addlegendentry{Defined Schemas:}
+%No Defined Schemas
+\addplot[fill=blue!70!white] coordinates {
+(0,1)(1649,2)(0,3)(2335,4)(0,5)(1931,6)};
+\addlegendentry{None}
+%One Defined Schemas
+\addplot[fill=grey!70!white] coordinates {
+(0,1)(257,2)(0,3)(5517,4)(0,5)(2602,6)};
+\addlegendentry{One}
+%Many Defined Schemas
+\addplot[fill=brown!70!white] coordinates {
+(0,1)(1279,2)(0,3)(7206,4)(0,5)(19418,6)};
+\addlegendentry{Many}
+
+
+%No Used Schemas
+\addlegendimage{empty legend}
+\addlegendentry{Used Schemas:}
+\addplot[fill=blue] coordinates {
+%(2892,1)(0,2)(3274,3)(0,4)(2622,5)(0,6)};
+(3185,1)(0,2)(3274,3)(0,4)(2622,5)(0,6)};
+\addlegendentry{None}
+%One Used Schemas
+\addplot[fill=grey!70!black] coordinates {
+(0,1)(0,2)(6917,3)(0,4)(3064,5)(0,6)};
+\addlegendentry{One}
+%Many Used Schemas
+\addplot[fill=brown!70!black] coordinates {
+(0,1)(0,2)(4867,3)(0,4)(18265,5)(0,6)};
+\addlegendentry{Many}
+
+
+%\legend{No Used Schemas,One Used Schemas,Many Used Schemas, No Defined Schemas,One Defined Schemas,Many Defined Schemas}
+\end{axis}
+\end{tikzpicture}
+\end{document}

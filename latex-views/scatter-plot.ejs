@@ -1,0 +1,32 @@
+\documentclass[tikz, border=1mm]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+%\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.17}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+xlabel={<%=data.x.replaceAll("_"," ")%>},
+grid = major,
+ylabel={<%=data.y.replaceAll("_"," ")%>},
+width=10cm, 
+height=6cm,
+colormap/bluered,
+colorbar horizontal,
+colorbar style={
+at={(0.95,0.95)},anchor=south east,height=0.2cm,width=0.5*\pgfkeysvalueof{/pgfplots/parent axis width},
+xticklabel pos=upper,
+xlabel={APIs},
+axis background/.style={fill=white!10}
+}] 
+\addplot[mark size = 0.5pt, only marks, scatter, point meta = explicit] 
+	table[meta = z] {
+x y z <%Object.keys(data.d).forEach((item)=>{%>
+<%-item%> <%-data.d[item]%> <%})%>
+
+ };
+\end{axis}
+\draw [blue, fill] (-0.5,-1) circle (0pt) node [right] {<%=data.count%> APIs};
+\draw [blue, fill] (6,-1) circle (0pt) node [right] {$\rho=<%=data.corr%>$};
+\end{tikzpicture}
+\end{document}

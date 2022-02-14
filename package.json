@@ -1,0 +1,33 @@
+{
+  "name": "icsa2022-web-apis-structures-and-data-models-analysis",
+  "version": "1.0.0",
+  "description": "This is the replication package of the paper entitled \"Web APIs Structures and Data Models Analysis\" by Souhaila Serbout, Fabio Di Lauro, and Cesare Pautasso accepted to the Technical Track of the 19th IEEE International Conference on Software Architecture (ICSA 2022).",
+  "main": "generate-results.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis.git"
+  },
+  "keywords": [
+    "replication",
+    "web",
+    "apis",
+    "empirical",
+    "study"
+  ],
+  "author": "@SouhailaSerbout",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis/issues"
+  },
+  "homepage": "https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "fs": "^0.0.1-security",
+    "unzip": "^0.1.11",
+    "unzipper": "^0.10.11",
+    "zlib": "^1.0.5"
+  }
+}

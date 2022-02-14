@@ -1,0 +1,36 @@
+\documentclass[tikz, border=1mm]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+%\usepackage{pgfplotstable}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+scale only axis,  
+symbolic x coords ={<%=(Object.keys(data.total)).sort().join(",")%>},
+yticklabel style={font=\small},
+xticklabel style={
+scaled y ticks=false,
+      inner sep=7,
+      rotate=90
+      ,font=\tiny},width=12cm,height=5cm,legend entries={Total,Valid,Invalid},  enlarge x limits=0.02,enlarge y limits=0.08,legend style={at={(0.08,0.75)},anchor=west},legend cell align=left,xtick distance=2]
+	%total
+	\addplot[thick,smooth,color=black] coordinates {
+		<%var previous =0;(Object.keys(data.total)).sort().forEach(function(key) {if(key!='NULL'){%>
+			(<%-key%>,<%-data.total[key]+previous%>)<%};previous = data.total[key]+previous});%>
+	};
+	%valid
+	\addplot[thick,smooth,color=green!70!black] coordinates {
+		<%var previous =0%>
+		<%(Object.keys(data.valid)).sort().forEach(function(key) {%>
+			<%if(key!='NULL'){%>(<%-key%>,<%-data.total[key]+previous%>)<%};previous = data.total[key]+previous});%>
+	};
+    %invalid
+%	\addplot[thick,smooth,color=red] coordinates {
+%		<%var previous =0%>
+%		<%(Object.keys(data.invalid)).sort().forEach(function(key) {%>
+%			<%if(key!='NULL'){%>(<%-key%>,<%-data.total[key]+previous%>)<%};previous = data.total[key]+previous});%>
+%	};
+	
+\end{axis}
+\end{tikzpicture}
+\end{document}

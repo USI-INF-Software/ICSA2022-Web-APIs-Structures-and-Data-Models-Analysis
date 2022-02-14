@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+OASCollection_and_metrics.json
+results-pdf/
+results-tex/
