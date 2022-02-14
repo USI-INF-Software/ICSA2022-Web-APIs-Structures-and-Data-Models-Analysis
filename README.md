@@ -57,5 +57,25 @@ To run the scripts you are required to have Node.js installed in your machine ( 
 First clone this repository on your machine 
 
 ```
-git clone 
+git clone https://github.com/USI-INF-Software/ICSA2022-Web-APIs-Structures-and-Data-Models-Analysis.git
 ```
+
+Then run:
+
+```
+npm install 
+```
+
+to install the required modules. 
+
+To produce the results run: 
+```
+node generate-results.js 
+```
+And, finally, the following command which generates the results visualizations used in the paper and additional ones in the `results-pdf` folder.
+
+```
+node compile-results.js 
+```
+
+
