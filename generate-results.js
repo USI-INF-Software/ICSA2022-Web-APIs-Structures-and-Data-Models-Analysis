@@ -23,41 +23,43 @@ if (!fs.existsSync('build')) {
 if (!fs.existsSync('OASCollection_and_metrics.json')) {
     /*unzip the OASCollection_and_metrics.json.zip file*/
     fs.createReadStream('OASCollection_and_metrics.json.zip').pipe(unzipper.Extract({ path: './' })).on('finish', () => {
+        /*read the OASCollection_and_metrics.json file*/
         fs.readFile('OASCollection_and_metrics.json', 'utf8', function (err, contents) {
-            /*read the OASCollection_and_metrics.json file*/
-            var data = JSON.parse(contents);
-            generateMonthlyDistributionResults(data);
-            generateScatterPlots(data, "paths", "unique_defined_schemas")
-            generateScatterPlots(data, "breath", "unique_defined_schemas")
-            generateScatterPlots(data, "paths", "unique_used_schemas")
-            generateScatterPlots(data, "breath", "unique_used_schemas")
-            generateScatterPlots(data, "popularity", "paths")
-            generateScatterPlots(data, "reused_schemas", "paths")
-            generateScatterPlots(data, "paths", "breath")
-            generateScatterPlots(data, "httpmethods", "breath")
-            generateScatterPlots(data, "httpmethods", "paths")
+            generateAll(contents);
+
+
         });
     })
 }
 else {
 
     fs.readFile('OASCollection_and_metrics.json', 'utf8', function (err, contents) {
-        var data = JSON.parse(contents);
-
-        generateMonthlyDistributionResults(data);
-        // generateClassesPlot(data)
-        generateScatterPlots(data, "paths", "unique_defined_schemas")
-        generateScatterPlots(data, "breath", "unique_defined_schemas")
-        generateScatterPlots(data, "paths", "unique_used_schemas")
-        generateScatterPlots(data, "breath", "unique_used_schemas")
-        generateScatterPlots(data, "popularity", "paths")
-        generateScatterPlots(data, "reused_schemas", "paths")
-        generateScatterPlots(data, "paths", "breath")
-        generateScatterPlots(data, "httpmethods", "breath")
-        generateScatterPlots(data, "httpmethods", "paths")
+        generateAll(contents);
     });
 }
 
+
+function generateAll(contents) {
+    var data = JSON.parse(contents);
+    /*generate the monthly distribution results*/
+    generateMonthlyDistributionResults(data);
+    /*generate the scatter plots*/
+    generateScatterPlots(data, "paths", "unique_defined_schemas")
+    generateScatterPlots(data, "breath", "unique_defined_schemas")
+    generateScatterPlots(data, "paths", "unique_used_schemas")
+    generateScatterPlots(data, "breath", "unique_used_schemas")
+    generateScatterPlots(data, "unique_defined_schemas", "unique_used_schemas")
+    generateScatterPlots(data, "reused_schemas", "unique_used_schemas")
+    generateScatterPlots(data, "popularity", "paths")
+    generateScatterPlots(data, "reused_schemas", "paths")
+    generateScatterPlots(data, "reused_schemas", "breath")
+    generateScatterPlots(data, "paths", "breath")
+    generateScatterPlots(data, "httpmethods", "breath")
+    generateScatterPlots(data, "httpmethods", "paths")
+    /*generate the statistics table*/
+    generateStatsTable(data);
+    /*generate the bar charts*/
+}
 /*generate the monthly distribution results*/
 function generateMonthlyDistributionResults(data) {
     /*count files with the same short date*/
@@ -142,17 +144,58 @@ function generateScatterPlots(data, x, y) {
     y_std = Math.sqrt(y_var);
     correlation = covar / (x_std * y_std);
 
-   if(x == 'breath') x = "Breadth"
-   if(y== ' breath') y='Breadth'
-    var toPrint = {data:{ d:d, x: x, y: y, count: counter,corr:correlation.toFixed(2) }}
+
+    if (x == 'breath') x = "Breadth"
+    if (y == 'breath') y = 'Breadth'
+
+    x = x.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+    y = y.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+    
+    var toPrint = { data: { d: d, x: x, y: y, count: counter, corr: correlation.toFixed(2) } }
     fs.writeFileSync(`results-tex/scatter-plot-${x}-vs-${y}.tex`, ejs.render(views["scatter-plot"], toPrint));
 }
 
 
 
-
-
-
+function generateStatsTable(data) {
+    /*compute min,median,mean,stddev and max of all the metrics*/
+    var min = {};
+    var median = {};
+    var mean = {};
+    var stddev = {};
+    var max = {};
+    var counter = 0;
+    data.forEach(function (item) {
+        for (var key in item.metrics) {
+            if (item.metrics[key] != 0) {
+                counter++;
+                if (min[key] == undefined) {
+                    min[key] = item.metrics[key];
+                    median[key] = item.metrics[key];
+                    mean[key] = item.metrics[key];
+                    stddev[key] = 0;
+                    max[key] = item.metrics[key];
+                }
+                if (min[key] > item.metrics[key]) {
+                    min[key] = item.metrics[key];
+                }
+                if (max[key] < item.metrics[key]) {
+                    max[key] = item.metrics[key];
+                }
+                mean[key] += item.metrics[key];
+                stddev[key] += Math.pow(item.metrics[key], 2);
+            }
+        }
+    }
+    );
+    for (var key in mean) {
+        mean[key] /= counter;
+        stddev[key] = Math.sqrt(stddev[key] / counter - Math.pow(mean[key], 2));
+    }
+    var toPrint = { data: { min: min, median: median, mean: mean, stddev: stddev, max: max } }
+    console.log(toPrint);
+    // fs.writeFileSync(`results-tex/stats-table.tex`, ejs.render(views["stats-table"], toPrint));
+}
 
 
 
